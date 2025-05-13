@@ -1,5 +1,3 @@
-import java.util.Currency;
-
 public class DoubleLinkedList {
     
     private static class Node {
