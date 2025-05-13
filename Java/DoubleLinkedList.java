@@ -1,71 +1,62 @@
-// Single Linked List
-
-class SingleLinkedList{
-
-    // Node class
+public class DoubleLinkedList {
+    
     private static class Node {
+        
         int data;
         Node next;
+        Node previous;
 
-        // Node Constructor
+        //Constructor
         Node (int data){
             this.data = data;
             this.next = null;
+            this.previous = null;
         }
     }
 
     private Node head;
 
-    // SLL Constructor
-    public SingleLinkedList(){
+    // DLL Constructor
+    DoubleLinkedList(){
         this.head = null;
     }
 
     public void add(int data){
-        Node newNode = new Node (data);
-        // if List is empty
-        if (head == null){
+        
+        Node newNode = new Node(data);
+        if(head == null){
             head = newNode;
         }
-        // if List is filled
         else{
             Node current = head;
-            //move to last position
+
             while (current.next != null) {
                 current = current.next;
             }
             current.next = newNode;
+            newNode.previous = current;
         }
     }
 
     public void addArray(int[] data){
-        for (int num: data){
+        for(int num : data){
             add(num);
         }
     }
 
     public void remove(int data){
-        if (head == null) return;
+        if(head == null) return;
 
-        // remove head
-        if (head.data == data){
+        if (head.data == data) {
             head = head.next;
-            return;
-        }
-
-        Node current = head;
-        while (current.next != null && current.next.data != data){
-            current = current.next;
-        }
-        if (current.next != null){
-            current.next = current.next.next;
+            head.previous = null;
         }
     }
 
     public void printList(){
         Node current = head;
-        while (current != null){
-            if(current.next == null){
+        while (current != null) {
+            if (current.next == null){
                 System.out.println(current.data);
             }
             else{
@@ -75,12 +66,15 @@ class SingleLinkedList{
         }
     }
 
-    public SingleLinkedList.Node getHead(){
+    public DoubleLinkedList.Node getHead(){
         return this.head;
     }
 
-    public static void main(String args[]){
-
+    public static void main(String[] args){
+        DoubleLinkedList DLL = new DoubleLinkedList();
+        int[] arr = {1,2,3,4,5};
+        DLL.addArray(arr);
+        DLL.printList();
+        System.out.println(DLL.getHead().data);
     }
 }
-
