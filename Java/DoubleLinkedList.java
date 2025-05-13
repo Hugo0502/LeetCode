@@ -1,3 +1,5 @@
+import java.util.Currency;
+
 public class DoubleLinkedList {
     
     private static class Node {
@@ -51,6 +53,14 @@ public class DoubleLinkedList {
             head = head.next;
             head.previous = null;
         }
+        else{
+            Node current = head;
+            while (current.data != data && current.next != null){
+                current = current.next;
+            }
+            current.next.previous = current.previous;
+            current.previous.next = current.next;
+        }
     }
 
     public void printList(){
@@ -60,7 +70,7 @@ public class DoubleLinkedList {
                 System.out.println(current.data);
             }
             else{
-                System.out.print(current.data + " --> ");
+                System.out.print(current.data + " <-> ");
             }
             current = current.next;
         }
@@ -71,10 +81,12 @@ public class DoubleLinkedList {
     }
 
     public static void main(String[] args){
-        DoubleLinkedList DLL = new DoubleLinkedList();
-        int[] arr = {1,2,3,4,5};
-        DLL.addArray(arr);
-        DLL.printList();
-        System.out.println(DLL.getHead().data);
+        DoubleLinkedList List = new DoubleLinkedList();
+        int[] nums = {1,2,3,4,5};
+        List.addArray(nums);
+        List.printList();
+        List.remove(3);
+        List.printList();
+        
     }
 }
